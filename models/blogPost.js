@@ -20,7 +20,8 @@ blogPost.init(
         },
         content: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 'I didnt write anything',
         },
     },
     // not sure if i'll need them but here they are!

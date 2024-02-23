@@ -1,28 +1,28 @@
 const { blogPost } = require('../models');
-
+console.log('blogPostData');
 const blogPostData = [
     {
         title: 'My first blog post!',
-        message: 'look at me writing a blog post!',
+        content: 'look at me writing a blog post!',
     },
     {
         title: 'My second blog post!',
-        message: 'i am writing more and more!!!!',
+        content: 'i am writing more and more!!!!',
     },
     {
         title: 'im thinking today',
-        message: 'such deep thoughts i am having',
+        content: 'such deep thoughts i am having',
     },
     {
         title: 'yet another interesting post',
-        message: 'here its being posted for all to see',
+        content: 'here its being posted for all to see',
     },
     {
         title: 'asdflawjefoawijef',
-        message: 'sdafljnasdflnasdflkjnasdfl',
+        content: 'sdafljnasdflnasdflkjnasdfl',
     },
 ];
-
+console.log(blogPostData);
 const seedBlogPost = () => blogPost.bulkCreate(blogPostData);
 
 module.exports = seedBlogPost;

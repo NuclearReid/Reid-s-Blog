@@ -8,5 +8,6 @@ const seedAll = async () => {
     await seedBlogPost();
 
     process.exit(0);
-}
+};
+
 seedAll();
