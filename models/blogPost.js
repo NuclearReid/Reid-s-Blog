@@ -23,6 +23,14 @@ blogPost.init(
             allowNull: true,
             defaultValue: 'I didnt write anything',
         },
+        user_id:{
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'users',
+                key: 'id',
+            },
+        },
+
     },
     // not sure if i'll need them but here they are!
     //hooks{    }

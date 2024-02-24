@@ -1,5 +1,5 @@
 const { blogPost } = require('../models');
-console.log('blogPostData');
+// console.log('blogPostData');
 const blogPostData = [
     {
         title: 'My first blog post!',
@@ -22,7 +22,7 @@ const blogPostData = [
         content: 'sdafljnasdflnasdflkjnasdfl',
     },
 ];
-console.log(blogPostData);
+// console.log(blogPostData);
 const seedBlogPost = () => blogPost.bulkCreate(blogPostData);
 
 module.exports = seedBlogPost;

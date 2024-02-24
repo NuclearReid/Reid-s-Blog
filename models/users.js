@@ -47,4 +47,4 @@ Users.init(
     }
 );
 
-module.exports = blogPost;
+module.exports = Users;
