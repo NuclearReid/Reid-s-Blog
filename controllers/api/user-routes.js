@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { Users }= require('../../models');
+const { User }= require('../../models');
 
 
 
 router.get('/', async (req, res) => {
     try {
-        const allUsers = await Users.findAll();
+        const allUsers = await User.findAll();
         if(!allUsers){
             res.status(404).json({message: 'no users found'});
             return;
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) =>{
     try {
-        const userData = await Users.create({
+        const userData = await User.create({
             userName: req.body.userName,
             password: req.body.password,
             email: req.body.email,

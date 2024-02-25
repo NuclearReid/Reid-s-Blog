@@ -1,12 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
+class Comment extends Model{}
 
-class blogPost extends Model{
-    // I think I'll have to put checks in here to make sure the person is logged in before posting?
-}
-
-blogPost.init(
+Comment.init(
     {
         id:{
             type: DataTypes.INTEGER,
@@ -14,14 +11,9 @@ blogPost.init(
             allowNull: false,
             autoIncrement: true,
         },
-        title:{
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        content: {
+        commentPost:{
             type: DataTypes.TEXT,
-            allowNull: true,
-            defaultValue: 'I didnt write anything',
+            allowNull: false,
         },
         user_id:{
             type: DataTypes.INTEGER,
@@ -30,21 +22,23 @@ blogPost.init(
                 key: 'id',
             },
         },
-        comment_id:{
+        blogPost_id:{
             type: DataTypes.INTEGER,
-            references: {
-                model: 'comment',
+            references:{
+                model: 'blogpost',
                 key: 'id',
             },
         },
     },
     {
         sequelize,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'blogpost',
+        modelName: 'comment',
     }
-);
 
-module.exports = blogPost;
+)
 
+
+module.exports = Comment;

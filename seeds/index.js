@@ -1,7 +1,7 @@
 const sequelize = require('../config/connection');
 // i'm not sure if this file is not linking up? 
 const seedBlogPost = require('./blogData');
-const seedUserData = require('./usersData');
+const seedUserData = require('./userData');
 
 const seedAll = async () => {
     await sequelize.sync({ force: true });
