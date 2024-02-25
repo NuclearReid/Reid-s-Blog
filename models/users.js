@@ -1,8 +1,11 @@
 const { Model, DataTypes} = require('sequelize');
+const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class Users extends Model{
-    // nothing in here yet, i think i'll be checking hashed passes in here
+    checkPassword(loginPw){
+        return bcrypt.compareSync(loginPw, this.password);
+    }
 }
 
 Users.init(
@@ -23,12 +26,12 @@ Users.init(
         password:{
             type: DataTypes.STRING,
             allowNull: false,
-            validate:{
-                is: {
-                    args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    msg: 'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.',
-                  },
-            },
+            // validate:{
+            //     is: {
+            //         args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+            //         msg: 'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.',
+            //       },
+            // },
         },
         email:{
             type: DataTypes.STRING,
@@ -39,6 +42,16 @@ Users.init(
         },
     },
     {
+        hooks: {
+            async beforeCreate(newUserData) {
+                newUserData.password = await bcrypt.hash(newUserData.password, 10);
+                return newUserData;
+            },
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+                return updatedUserData;
+            },
+        },
         sequelize,
         freezeTableName: true,
         underscored: true,
