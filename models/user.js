@@ -19,6 +19,7 @@ User.init(
         userName: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate:{
                 isAlphanumeric: true,
             },
@@ -36,6 +37,7 @@ User.init(
         email:{
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate:{
                 isEmail: true,
             },
@@ -53,6 +55,7 @@ User.init(
             },
         },
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'user',

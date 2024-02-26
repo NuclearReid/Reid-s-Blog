@@ -1,9 +1,18 @@
 const router = require('express').Router();
+const {blogPost, Comment} = require('../models');
 
 
-router.get('/', (req, res) =>{
+router.get('/', async (req, res) =>{
     try {
-        res.render('home');
+        const dbBlogPostData = await blogPost.findAll();
+        
+        const allPosts = dbBlogPostData.map((allPost) =>
+            allPost.get({plain: true})
+        );
+        
+        res.render('home',{
+            allPosts,
+        });
 
     } catch (error) {
         console.error(error);
