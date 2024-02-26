@@ -10,6 +10,7 @@ router.get('/', (req, res) =>{
         res.status(500).json(error);
     }
 });
+
 router.get('/login', (req, res) =>{
     try {
         res.render('login');
@@ -17,5 +18,13 @@ router.get('/login', (req, res) =>{
         res.status(500).json(error);
     }
 });
+
+router.get('/createAccount', (req, res) =>{
+    try {
+        res.render('createAccount');
+    } catch (error) {
+        res.status(500).json(error);
+    }
+})
 
 module.exports = router;
