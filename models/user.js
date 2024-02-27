@@ -45,6 +45,9 @@ User.init(
     },
     {
         hooks: {
+            
+            // put in a hook that makes the email.toLowerCase();
+
             async beforeCreate(newUserData) {
                 newUserData.password = await bcrypt.hash(newUserData.password, 10);
                 return newUserData;
