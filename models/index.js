@@ -3,6 +3,28 @@ const User = require('./user');
 const Comment = require('./comment');
 
 
+User.hasMany(blogPost, {
+    foreingkey: 'user_id',
+});
+
+blogPost.belongsTo(User, {
+    foreignKey: 'user_id',
+});
+
+
+
+// blogPost.hasMany(Comment, {
+//     foreignKey: 'blogPost_id',
+//     onDelete: 'CASCADE',
+// });
+
+// Comment.belongsTo(blogPost, {
+//     foreignKey: 'blogPost_id'
+// });
+
+module.exports = { blogPost, User, Comment };
+
+
 // -- associations with User model --
 // a user has many comments
 
@@ -23,28 +45,3 @@ const Comment = require('./comment');
 
 // Notes on making these connections
 // User is the source model, blogPost is the target model
-
-User.hasMany(blogPost, {
-    foreingkey: 'user_id',
-    onDelete: 'CASCADE',
-});
-// The A.belongsTo(B) association means that a One-To-One relationship exists between A and B,
-//  with the foreign key being defined in the source model (A).
-
-// blogPost is the source, User is the target. So the foreignKey should be 'blogPost_id'? 
-blogPost.belongsTo(User, {
-    // should the foreingKey here be for blogPost?
-    foreignKey: 'user_id',
-});
-
-blogPost.hasMany(Comment, {
-    foreignKey: 'blogPost_id',
-    onDelete: 'CASCADE',
-});
-
-Comment.belongsTo(blogPost, {
-    foreignKey: 'blogPost_id'
-});
-
-
-module.exports = { blogPost, User, Comment };

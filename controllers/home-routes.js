@@ -2,35 +2,52 @@ const router = require('express').Router();
 const {blogPost, Comment, User} = require('../models');
 const withAuth = require('../utils/auth');
 
-
+// the home page
 router.get('/', async (req, res) =>{
     try {
         const dbBlogPostData = await blogPost.findAll({
             include: [
                 {
                     model: User,
-                    attributes: ['email'],
+                    attributes: ['userName'],
                 },
             ],
         });
         // serialize the posts
-        const allPosts = dbBlogPostData.map((allPost) =>
-            allPost.get({plain: true})
-        );
+        const allPosts = dbBlogPostData.map((allPost) => allPost.get({plain: true}));
         
         res.render('home',{
             allPosts,
-            // req.session.logged_in will either be true or false
             logged_in: req.session.logged_in
         });
-
     } catch (error) {
         console.error(error);
         res.status(500).json(error);
     }
 });
 
+router.get('/blogpost/:id', async (req, res) =>{
+    try {
+        const dbBlogPostData = await blogPost.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['userName'],
+                },
+            ],
+        });
+        const selectBlog = dbBlogPostData.get({ plain: true });
+        
+        res.render('comment', {
+            ...selectBlog,
+            logged_in: req.session.logged_in
+        });
 
+    } catch (error) {
+        // console.log(error)
+        res.status(500).json(error);
+    }
+});
 
 router.get('/profile', withAuth, async (req, res) => {
     try {
@@ -71,5 +88,9 @@ router.get('/createAccount', (req, res) =>{
         res.status(500).json(error);
     }
 })
+
+
+
+
 
 module.exports = router;
