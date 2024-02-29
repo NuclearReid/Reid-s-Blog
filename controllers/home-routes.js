@@ -26,6 +26,8 @@ router.get('/', async (req, res) =>{
     }
 });
 
+
+
 router.get('/blogpost/:id', async (req, res) => {
     try {
         // Find the blog post by its ID and include the associated user

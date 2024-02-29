@@ -12,24 +12,17 @@
 </section>
 
 {{> blogComment }}
-
-<section>
-    <form class="newComment" id="postId" data-blogid="{{id}}">
-        <div class="mb-3">
-            <label for="text" class="form-label">Leave a comment!</label>
-            <textarea class="form-control" id="comment-text" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Post!</button>
-    </form>
-</section>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-{{!-- <section>
-    <footer id="postId">{{ id }}</footer>
-</section> --}}
+{{#if logged_in}}
+    <section>
+        <form class="newComment" id="postId" data-blogid="{{id}}">
+            <div class="mb-3">
+                <label for="text" class="form-label">Leave a comment!</label>
+                <textarea class="form-control" id="comment-text" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Post!</button>    
+        </form>
+    </section>
+{{/if}}
 
 <script src="../../js/comment.js"></script>
