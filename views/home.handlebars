@@ -1,5 +1,8 @@
-{{#each allPosts as |blogPost|}}
-{{!-- {{> blogpost-details }} --}}
+
+{{> blogpost-details logged_in=logged_in}}
+
+{{!-- {{#each allPosts as |blogPost| }}
+{{> blogpost-details }}
 <section class="card">
     <div class="card mb-3" style="width: 18rem;">
     <div class="card-body">
@@ -7,11 +10,17 @@
         </h5>
         <p class="card-text">{{content}}</p>
         <p class="card-text">Created by: {{ blogPost.user.userName }} <br> On: {{format_date date_created}}</p>
-        <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
+        {{log logged_in}}
+        {{#if logged_in}}
+            <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
+        {{else}}
+            <a href="/login" class="btn btn-primary">Login to comment</a>
+        {{/if}}
+
     </div>
     </div>
 </section>
 {{/each}}
 
 <script src="./js/comment.js"></script>
-
+ --}}

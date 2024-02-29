@@ -1,13 +1,13 @@
-{{#each allPosts as |blogPost|}}
+{{#each comments as |comment|}}
 {{!-- this is where i'll render the comments when they're in the database --}}
 <section class="card">
     <div class="card mb-3" style="width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title">{{title}}
-        </h5>
-        <p class="card-text">{{content}}</p>
-        <p class="card-text">Created by: {{ blogPost.user.userName }} <br> On: {{format_date date_created}}</p>
-        <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
+        {{!-- <h5 class="card-title">{{title}}
+        </h5> --}}
+        <p class="card-text">{{comment.commentPost}}</p>
+        <p class="card-text">Created by: {{ blogPost.user.userName }} <br> On: </p>
+        {{!-- <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a> --}}
     </div>
     </div>
 </section>
