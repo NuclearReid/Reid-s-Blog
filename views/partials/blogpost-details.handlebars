@@ -5,17 +5,9 @@
     <div class="card-body">
         <h5 class="card-title">{{title}}
         </h5>
-        <p class="card-text">{{content}}</p>
-        <p class="card-text">Created by: {{ blogPost.user.userName }} <br> On: {{format_date date_created}}</p>
-        {{!-- {{log logged_in}} --}}
-        {{!-- {{log blogPost}} --}}
-
-        {{!-- {{#if logged_in}} --}}
-            <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
-        {{!-- {{else}}
-            <a href="/login" class="btn btn-primary">Login to comment</a>
-        {{/if}} --}}
-
+        <p class="card-text">{{content}}</p>                              {{! i don't have the date working yet}}
+        <p class="card-text">Created by: {{ blogPost.user.userName }} <br>On: {{format_date date_created}} </p>
+        <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
     </div>
     </div>
 </section>

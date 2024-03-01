@@ -7,14 +7,11 @@
     <title>Reid's Blog</title>
 </head>
 <body>
+    {{!-- the navbar partial, i have it in the main cause i always want it displayed --}}
     {{> navbar logged_in=logged_in}}
-    
-    {{!-- <ul>
-        <li><a href="/">home</a></li>
-        <li><a href="/login">login</a></li>
-        <li></li>
-    </ul> --}}
+
     <main>
+        {{!-- when a res.render('____') is called, {{{ body }}} is replaced with that file--}}
         {{{body}}}
     </main>
 

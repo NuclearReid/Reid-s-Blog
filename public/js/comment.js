@@ -2,24 +2,28 @@ const newCommentFormHandler = async (event) => {
   event.preventDefault();
   console.log("in comment Form");
 
-  // Collect values from the login form
+  // Collects the info from the comment text box
   const commentPost = document.querySelector("#comment-text").value;
+  // gets the blogPost id so the comment can then be attached to that value in the database
+  // it's used so when you click on a blog post you get the comments for it
   const blogPost_Id = document.querySelector("#postId").dataset.blogid;
-  // Send a POST request to the API endpoint
-
-  console.log(blogPost_Id);
+  
+  // Send a POST request to the comment api
   const response = await fetch("/api/blog/comment", {
     method: "POST",
+    // sends the comment text and the blogPost (the api will add it to the database)
     body: JSON.stringify({ commentPost, blogPost_Id }),
     headers: {
       "Content-Type": "application/json",
     },
   });
+  // this was just for troubleshooting
   console.log(response);
   console.log(blogPost_Id);
 
   if (response.ok) {
-    // If successful, redirect the browser to the profile page
+    // If it talks to the api correctly
+    // reloads the page so the new comment will be loaded up to/displayed
     document.location.reload();
   }
 };

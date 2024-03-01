@@ -1,4 +1,5 @@
 
+{{!-- the blog post they clicked on --}}
 <section class="card">
     <div class="card mb-3" style="width: 18rem;">
         <div class="card-body">
@@ -6,12 +7,12 @@
             </h5>
             <p class="card-text">{{content}}</p>
             <p class="card-text">Created by: {{ user.userName }} <br> On: {{format_date date_created}}</p>
-            {{!-- <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a> --}}
         </div>
     </div>
 </section>
-
+{{!-- the partial to display the comments --}}
 {{> blogComment }}
+{{!-- if they're logged in, they have the option to leave a comment --}}
 {{#if logged_in}}
     <section>
         <form class="newComment" id="postId" data-blogid="{{id}}">

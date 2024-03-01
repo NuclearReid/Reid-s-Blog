@@ -5,9 +5,11 @@ const withAuth = require('../utils/auth');
 // the home page
 router.get('/', async (req, res) =>{
     try {
+        // finds all the blogPosts
         const dbBlogPostData = await blogPost.findAll({
             include: [
                 {
+                    // includes the username, will let me display the username on the blog post
                     model: User,
                     attributes: ['userName'],
                 },
@@ -16,7 +18,9 @@ router.get('/', async (req, res) =>{
         // serialize the posts
         const allPosts = dbBlogPostData.map((allPost) => allPost.get({plain: true}));
         console.log(req.session.logged_in)
+        // renders home.handlebars
         res.render('home',{
+            // the datat that's sent/will be usable in 'home.handlebars'
             allPosts,
             logged_in: req.session.logged_in
         });
@@ -27,7 +31,10 @@ router.get('/', async (req, res) =>{
 });
 
 
-
+// This will be used when someone clicks on a specific blog post
+    // take a look at /partials/blogpost-details.handlebars for a little more how it works
+        // essentially, when you click on the 'comment' button, the href is '/blogpost/{{blogPost.id}}'
+        // then this .get() is reached
 router.get('/blogpost/:id', async (req, res) => {
     try {
         // Find the blog post by its ID and include the associated user
@@ -42,7 +49,8 @@ router.get('/blogpost/:id', async (req, res) => {
 
         // Finds all comments related to the blog post
         const dbCommentData = await Comment.findAll({
-            where: { blogPost_id: req.params.id }, // Filter by the blog post ID
+            // Filter by the blog post ID (blogPost_id is a key in in the Comment model)
+            where: { blogPost_id: req.params.id }, 
             include: [
                 {
                     model: blogPost,
@@ -51,16 +59,17 @@ router.get('/blogpost/:id', async (req, res) => {
             ],
         });
 
-        // Map the comments to plain objects
+        // serialise all the comments (this needs .map cause there can be more than 1 comments)
         const selectComments = dbCommentData.map(comment => comment.get({ plain: true }));
 
-        // Get the plain object for the blog post
+        // serialize the blog post. only 1 blog post so it doesn't need a .map()
         const selectBlog = dbBlogPostData.get({ plain: true });
 
         // Render the view with the blog post and associated comments
         res.render('comment', {
             ...selectBlog,
-            comments: selectComments, // Pass the comments array to the view
+            // sends the comment data to comment.handlebars
+            comments: selectComments, 
             logged_in: req.session.logged_in,
         });
     } catch (error) {
@@ -70,15 +79,30 @@ router.get('/blogpost/:id', async (req, res) => {
 });
 
 
-
+// the route for the profile/where a user can make a new blog post
+    // withAuth is a function in the utils folder
+        // Essentially checks if the session is NOT logged_in 
+        // if thats true, they're redirected to '/login' and the rest of the .get() isn't executed
 router.get('/profile', withAuth, async (req, res) => {
     try {
+        // uses the session to get the user_id
+        // (the session object is created in the server.js)
+        // took me a bit to get how this is working but open the Session table in mysql
+        // and log in with different accounts. It'll make more sense seeing
+        // what the table looks like
+        console.log(`the session.user_id: ${req.session.user_id}`);
+
       const userData = await User.findByPk(req.session.user_id, {
+        // doesn't get the password key
         attributes: { exclude: ['password'] },
       });
-  
       const user = userData.get({ plain: true });
-  
+      
+      // sends the data to profile and ensures logged_in is true
+
+      // un-related but I think my if statement in blogpost-details.handlebars isn't 
+      // working because i'm not sending logged_in: true. I'll need to take a look
+      // at this
       res.render('profile', {
         ...user,
         logged_in: true
@@ -89,7 +113,9 @@ router.get('/profile', withAuth, async (req, res) => {
     }
   });
 
-
+// when they click login or go to the /login end point 
+// seends them to /profile if they're logged in
+// or sends them to the login page
 router.get('/login', (req, res) =>{
     try {
         if(req.session.logged_in){
@@ -103,6 +129,8 @@ router.get('/login', (req, res) =>{
     }
 });
 
+// seendds them to the createAccount page
+// the logic for how this is done is all in public/js/signUp.js
 router.get('/createAccount', (req, res) =>{
     try {
         res.render('createAccount');

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class User extends Model{
+    // just checks to make sure the password sent is the same as the user's hashed password
     checkPassword(loginPw){
         return bcrypt.compareSync(loginPw, this.password);
     }

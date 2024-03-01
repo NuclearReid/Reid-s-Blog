@@ -9,18 +9,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        {{!-- if they're logged in, they see logout & new post --}}
         {{#if logged_in}}
         <li class="nav-item">
           <a class="nav-link" id="logout" href="/">logout</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">New Post</a>
+        </li>
         {{else}}
+        {{!-- if they're not logged in, they see login --}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
         {{/if}}
-        <li class="nav-item">
-          <a class="nav-link" href="/profile">Profile</a>
-        </li>
+        
       </ul>
     </div>
   </div>

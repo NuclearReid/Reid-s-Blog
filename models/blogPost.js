@@ -3,7 +3,6 @@ const sequelize = require('../config/connection');
 
 
 class blogPost extends Model{
-    // I think I'll have to put checks in here to make sure the person is logged in before posting?
 }
 
 blogPost.init(
