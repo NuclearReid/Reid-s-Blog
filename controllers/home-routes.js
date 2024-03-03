@@ -53,8 +53,8 @@ router.get('/blogpost/:id', async (req, res) => {
             where: { blogPost_id: req.params.id }, 
             include: [
                 {
-                    model: blogPost,
-                    attributes: ['id'],
+                    model: User,
+                    attributes: ['userName'],
                 },
             ],
         });
@@ -64,7 +64,9 @@ router.get('/blogpost/:id', async (req, res) => {
 
         // serialize the blog post. only 1 blog post so it doesn't need a .map()
         const selectBlog = dbBlogPostData.get({ plain: true });
-
+        console.log(selectBlog);
+        // console.log(selectComments);
+        // console.log(dbBlogPostData);
         // Render the view with the blog post and associated comments
         res.render('comment', {
             ...selectBlog,

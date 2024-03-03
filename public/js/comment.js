@@ -8,6 +8,10 @@ const newCommentFormHandler = async (event) => {
   // it's used so when you click on a blog post you get the comments for it
   const blogPost_Id = document.querySelector("#postId").dataset.blogid;
   
+  if(!commentPost){
+    alert('you need to enter a comment');
+    return;
+  }
   // Send a POST request to the comment api
   const response = await fetch("/api/blog/comment", {
     method: "POST",
