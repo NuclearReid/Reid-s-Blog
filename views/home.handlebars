@@ -10,7 +10,7 @@
         <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
         {{#if ../logged_in}}
             <a href="/blogUpdate/{{blogPost.id}}" type="button" class="btn btn-secondary">Update!</a>
-            <button type="button" class="btn btn-danger" data-deleteId="{{id}}">Delete!</button>
+            <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
         {{/if}}
     </div>
     </div>

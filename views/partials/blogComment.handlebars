@@ -8,7 +8,7 @@
              <p class="card-text">Created by: {{comment.user.userName}} <br> On: {{format_date date_created}}</p>
              {{#if ../logged_in}}
              <button type="button" class="btn btn-secondary" data-updateId="{{id}}">Update!</button>
-             <button type="button" class="btn btn-danger" data-deleteId="{{id}}">Delete!</button>
+             <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
              {{/if}}
         </div>
     </div>

@@ -1,24 +1,40 @@
-// delete a post
-const delButtonHandler = async (event) => {
-  console.log('the delete button');
-  if (event.target.hasAttribute('data-deleteId')){
-    const id = event.target.getAttribute('data-deleteId');
-    
-    // Send a DELETE request to the comment api
+// // delete a post
+document.querySelectorAll(".postInfo").forEach((deleteButton) => {
+  deleteButton.addEventListener("click", async (e) => {
+    console.log(e.target);
+    const id = e.target.dataset.id;
+    console.log(id);
     const response = await fetch(`/api/blog/${id}`, {
       method: "DELETE",
     });
-    if(response.ok){
+    if (response.ok) {
       document.location.reload();
-    } else{
-      alert('unable to delete the post');
+    }
+  });
+});
+/////////////////////////////////////////////////////////
+
+
+
+
+
+  // update a blog post
+  const updatePostHandler = async (event) => {
+    event.preventDefault();
+    const title = document.querySelector('#blog-title').value;
+    const content = document.querySelector('#blog-text').value;
+        
+      // Send a POST request to the API endpoint
+      const response = await fetch('/api/blog', {
+        method: 'POST',
+        // sends the title and content
+        body: JSON.stringify({ title, content }),
+        headers: { 
+            'Content-Type': 'application/json' 
+        },
+      });
+      if (response.ok) {
+        // If successful, redirect the browser to the home page
+        document.location.replace('/');
     }
   }
- };
-  
-  document
-    .querySelector(".postInfo")
-    .addEventListener("click", delButtonHandler);
-  /////////////////////////////////////////////////////////
-
-  

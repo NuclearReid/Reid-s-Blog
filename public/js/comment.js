@@ -60,5 +60,20 @@ const delButtonHandler = async (event) => {
   document
     .querySelector(".commentInfo")
     .addEventListener("click", delButtonHandler);
-  /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 
+  // delete a comment
+document.querySelectorAll(".commentInfo").forEach((deleteButton) => {
+  deleteButton.addEventListener("click", async (e) => {
+    console.log(e.target);
+    const id = e.target.dataset.id;
+    console.log(id);
+    const response = await fetch(`/api/blog/comment/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      document.location.reload();
+    }
+  });
+});
+/////////////////////////////////////////////////////////
