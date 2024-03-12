@@ -14,22 +14,22 @@ router.get('/', async (req, res) =>{
                     attributes: ['userName'],
                 },
             ],
+            order: [['id', 'DESC']]
         });
         // serialize the posts
         const allPosts = dbBlogPostData.map((allPost) => allPost.get({plain: true}));
-        console.log(req.session.logged_in)
-        // renders home.handlebars
+        // console.log(req.session.logged_in);
         res.render('home',{
-            // the datat that's sent/will be usable in 'home.handlebars'
+            // the data that's sent/will be usable in 'home.handlebars'
             allPosts,
             logged_in: req.session.logged_in
+           
         });
     } catch (error) {
         console.error(error);
         res.status(500).json(error);
     }
 });
-
 
 // This will be used when someone clicks on a specific blog post
     // take a look at /partials/blogpost-details.handlebars for a little more how it works
@@ -76,6 +76,19 @@ router.get('/blogpost/:id', async (req, res) => {
         });
     } catch (error) {
         console.error(error);
+        res.status(500).json(error);
+    }
+});
+// path for an update
+router.get('/blogUpdate/:id', async (req, res)=> {
+    try {
+        const dbBlogPostData = await blogPost.findByPk(req.params.id)
+        const selectPost = dbBlogPostData.get({plain: true});
+        // console.log(selectPost);
+        res.render('updateBlog',{
+            selectPost
+        });
+    } catch (error) {
         res.status(500).json(error);
     }
 });

@@ -1,3 +1,5 @@
+
+// to make a new comment
 const newCommentFormHandler = async (event) => {
   event.preventDefault();
   console.log("in comment Form");
@@ -35,3 +37,28 @@ const newCommentFormHandler = async (event) => {
 document
   .querySelector(".newComment")
   .addEventListener("submit", newCommentFormHandler);
+/////////////////////////////////////////////////////////
+
+// to delete a comment
+const delButtonHandler = async (event) => {
+  console.log('the delete button');
+  if (event.target.hasAttribute('data-deleteId')){
+    const id = event.target.getAttribute('data-deleteId');
+    
+    // Send a DELETE request to the comment api
+    const response = await fetch(`/api/blog/comment/${id}`, {
+      method: "DELETE",
+    });
+    if(response.ok){
+      document.location.reload();
+    } else{
+      alert("couldn't delete the comment");
+    }
+  }
+ };
+  
+  document
+    .querySelector(".commentInfo")
+    .addEventListener("click", delButtonHandler);
+  /////////////////////////////////////////////////////////
+

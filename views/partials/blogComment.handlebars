@@ -1,11 +1,15 @@
 {{#each comments as |comment|}}
 {{!-- this is where i'll render the comments when they're in the database --}}
-<section class="card">
+<section class="card commentInfo">
     <div class="card mb-3" style="width: 18rem;">
         <div class="card-body">
             <p class="card-text">{{comment.commentPost}}</p>
             {{!-- I can't get userName to work yet and I don't know why --}}
              <p class="card-text">Created by: {{comment.user.userName}} <br> On: {{format_date date_created}}</p>
+             {{#if ../logged_in}}
+             <button type="button" class="btn btn-secondary" data-updateId="{{id}}">Update!</button>
+             <button type="button" class="btn btn-danger" data-deleteId="{{id}}">Delete!</button>
+             {{/if}}
         </div>
     </div>
 </section>

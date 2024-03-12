@@ -1,28 +1,21 @@
-
-
-{{!-- I'm trying  --}}
-{{> blogpost-details logged_in=logged_in}}
-
-{{!-- {{#each allPosts as |blogPost| }}
-{{> blogpost-details }}
+{{#each allPosts as |blogPost| }}
+{{!-- {{log 'Blog post id is: '{{../id}} }} --}}
 <section class="card">
     <div class="card mb-3" style="width: 18rem;">
-    <div class="card-body">
+    <div class="card-body postInfo">
         <h5 class="card-title">{{title}}
         </h5>
-        <p class="card-text">{{content}}</p>
-        <p class="card-text">Created by: {{ blogPost.user.userName }} <br> On: {{format_date date_created}}</p>
-        {{log logged_in}}
-        {{#if logged_in}}
-            <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
-        {{else}}
-            <a href="/login" class="btn btn-primary">Login to comment</a>
+        <p class="card-text">{{content}}</p>                
+        <p class="card-text">Created by: {{ blogPost.user.userName }} <br>On: {{format_date date_created}} </p>
+        <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
+        {{#if ../logged_in}}
+            <a href="/blogUpdate/{{blogPost.id}}" type="button" class="btn btn-secondary">Update!</a>
+            <button type="button" class="btn btn-danger" data-deleteId="{{id}}">Delete!</button>
         {{/if}}
-
     </div>
     </div>
 </section>
 {{/each}}
 
-<script src="./js/comment.js"></script>
- --}}
+
+<script src="../js/changePost.js"></script>
