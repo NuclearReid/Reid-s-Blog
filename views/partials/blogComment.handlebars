@@ -7,7 +7,7 @@
             {{!-- I can't get userName to work yet and I don't know why --}}
              <p class="card-text">Created by: {{comment.user.userName}} <br> On: {{format_date date_created}}</p>
              {{#if ../logged_in}}
-             <button type="button" class="btn btn-secondary" data-updateId="{{id}}">Update!</button>
+             <a href="/commentUpdate/{{comment.id}}" type="button" class="btn btn-secondary" >Update!</a>
              <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
              {{/if}}
         </div>

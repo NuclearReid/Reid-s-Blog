@@ -39,30 +39,8 @@ document
   .addEventListener("submit", newCommentFormHandler);
 /////////////////////////////////////////////////////////
 
-// to delete a comment
-const delButtonHandler = async (event) => {
-  console.log('the delete button');
-  if (event.target.hasAttribute('data-deleteId')){
-    const id = event.target.getAttribute('data-deleteId');
-    
-    // Send a DELETE request to the comment api
-    const response = await fetch(`/api/blog/comment/${id}`, {
-      method: "DELETE",
-    });
-    if(response.ok){
-      document.location.reload();
-    } else{
-      alert("couldn't delete the comment");
-    }
-  }
- };
-  
-  document
-    .querySelector(".commentInfo")
-    .addEventListener("click", delButtonHandler);
-/////////////////////////////////////////////////////////
 
-  // delete a comment
+// delete a comment
 document.querySelectorAll(".commentInfo").forEach((deleteButton) => {
   deleteButton.addEventListener("click", async (e) => {
     console.log(e.target);
@@ -77,3 +55,33 @@ document.querySelectorAll(".commentInfo").forEach((deleteButton) => {
   });
 });
 /////////////////////////////////////////////////////////
+
+//update a comment  --> do the page render first
+document.querySelector('.updateComment').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const title = document.getElementById('blog-title').value;
+  const content = document.getElementById('blog-content').value;
+  const postId = document.getElementById('post-id').value; 
+
+  const response = await fetch(`/api/blog/updatePost/${postId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title, content }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
+
+  if (response.ok) {
+      // Handle success response
+      console.log('Post updated successfully!');
+  } else {
+      // Handle error response
+      console.error('Failed to update post');
+  }
+});
+/////////////////////////////////////////////////////////
+
+
+
+
+

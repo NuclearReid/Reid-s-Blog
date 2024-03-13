@@ -15,26 +15,27 @@ document.querySelectorAll(".postInfo").forEach((deleteButton) => {
 /////////////////////////////////////////////////////////
 
 
+// update a blog post
+document.querySelector('.updatePost').addEventListener('submit', async function(event) {
+  event.preventDefault();
+  const title = document.getElementById('blog-title').value;
+  const content = document.getElementById('blog-content').value;
+  const postId = document.getElementById('post-id').value; 
 
+  const response = await fetch(`/api/blog/updatePost/${postId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ title, content }),
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  });
 
-
-  // update a blog post
-  const updatePostHandler = async (event) => {
-    event.preventDefault();
-    const title = document.querySelector('#blog-title').value;
-    const content = document.querySelector('#blog-text').value;
-        
-      // Send a POST request to the API endpoint
-      const response = await fetch('/api/blog', {
-        method: 'POST',
-        // sends the title and content
-        body: JSON.stringify({ title, content }),
-        headers: { 
-            'Content-Type': 'application/json' 
-        },
-      });
-      if (response.ok) {
-        // If successful, redirect the browser to the home page
-        document.location.replace('/');
-    }
+  if (response.ok) {
+      // Handle success response
+      console.log('Post updated successfully!');
+      document.location.replace('/');
+  } else {
+      // Handle error response
+      console.error('Failed to update post');
   }
+});

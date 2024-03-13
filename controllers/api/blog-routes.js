@@ -72,7 +72,26 @@ router.delete('/comment/:id', async (req, res) => {
     }
 });
 
+router.put('/updatePost/:id', async (req, res) => {
+    try {
 
+        const post = await blogPost.findByPk(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        const { title, content } = req.body;
+
+        post.title = title;
+        post.content = content;
+
+        await post.save();
+
+        res.status(200).json({ message: 'Post updated successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 module.exports = router;

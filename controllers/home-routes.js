@@ -86,13 +86,27 @@ router.get('/blogUpdate/:id', async (req, res)=> {
         const selectPost = dbBlogPostData.get({plain: true});
         // console.log(selectPost);
         res.render('updateBlog',{
-            selectPost
+            selectPost,
+            logged_in: req.session.logged_in
         });
     } catch (error) {
         res.status(500).json(error);
     }
 });
-
+router.get('/commentUpdate/:id', async (req, res)=> {
+    try {
+        const dbCommentData = await Comment.findByPk(req.params.id)
+        const selectComment = dbCommentData.get({plain: true});
+        // console.log(selectPost);
+        // res.status(200).json(selectComment);
+        res.render('updateComment',{
+            selectComment,
+            logged_in: req.session.logged_in
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
 
 // the route for the profile/where a user can make a new blog post
     // withAuth is a function in the utils folder

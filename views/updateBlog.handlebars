@@ -1,18 +1,18 @@
 
 {{!-- this is called profile but it's really just to make a new blog post --}}
-<h1>the original post! </h1>
+<h1>the original post!</h1>
 <h3>original title: {{selectPost.title}}</h3>
 <h4>original blog content: {{selectPost.content}}</h4>
-<form class="newPost">
+<form class="updatePost">
+    <input type="hidden" id="post-id" value="{{selectPost.id}}">
     <div class="mb-3">
         <label for="text" class="form-label">Title</label>
-        <input type="text" class="form-control" id="blog-title" placeholder="New Blog Post">
+        <input type="text" class="form-control" id="blog-title" placeholder="Update Blog Post">
     </div>
     <div class="mb-3">
         <label for="text" class="form-label">Content</label>
-        <textarea class="form-control" id="blog-text" rows="3"></textarea>
+        <textarea class="form-control" id="blog-content" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Post!</button>
 </form>
-
-<script src="./js/changePost.js"></script>
+<script src="../js/changePost.js"></script>
