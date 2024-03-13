@@ -1,12 +1,13 @@
 <h1>the original post!</h1>
-<h3>original comment content: {{selectComment.content}}</h4>
+<h3>original comment content: {{selectComment.commentPost}}</h4>
+{{log selectComment}}
 <form class="updateComment">
-    <input type="hidden" id="post-id" value="{{selectComment.id}}">
-    <div class="mb-3">
+    <input type="hidden" id="comment-id" value="{{selectComment.id}}">
+    <div class="mb-3" id="blogPost-id" data-blogpostid="{{selectComment.blogPost_id}}">
         <label for="text" class="form-label">Content</label>
-        <textarea class="form-control" id="blog-content" rows="3"></textarea>
+        <textarea class="form-control" id="comment-content" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Post!</button>
 </form>
 
-{{!-- <script src="../js/comment.js"></script> --}}
+<script src="../js/changeComment.js"></script>

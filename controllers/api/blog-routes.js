@@ -35,7 +35,7 @@ router.post('/comment', async (req, res) => {
          console.log(error);
     }
 });
-
+// delete a blog post
 router.delete('/:id', async (req, res) => {
     try {
         const blogData = await blogPost.destroy({
@@ -54,6 +54,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// delete a comment
 router.delete('/comment/:id', async (req, res) => {
     try {
         const commentData = await Comment.destroy({
@@ -72,6 +73,7 @@ router.delete('/comment/:id', async (req, res) => {
     }
 });
 
+// change a blog post
 router.put('/updatePost/:id', async (req, res) => {
     try {
 
@@ -90,6 +92,25 @@ router.put('/updatePost/:id', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+// change a comment
+router.put('/updateComment/:id', async (req, res) => {
+    try {
+        const comment = await Comment.findByPk(req.params.id);
+        if(!comment){
+            return res.status(404).json({message: 'comment not found'});
+        }
+        const {content} = req.body;
+        console.log(req.body);
+        comment.commentPost = content;
+        await comment.save();
+        res.status(200).json({message: 'updated the comment!'});
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error)
     }
 });
 

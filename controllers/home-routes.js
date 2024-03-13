@@ -98,11 +98,11 @@ router.get('/commentUpdate/:id', async (req, res)=> {
         const dbCommentData = await Comment.findByPk(req.params.id)
         const selectComment = dbCommentData.get({plain: true});
         // console.log(selectPost);
-        // res.status(200).json(selectComment);
         res.render('updateComment',{
             selectComment,
             logged_in: req.session.logged_in
         });
+        // res.status(200).json(selectComment);
     } catch (error) {
         res.status(500).json(error);
     }

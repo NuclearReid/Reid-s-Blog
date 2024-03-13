@@ -56,32 +56,5 @@ document.querySelectorAll(".commentInfo").forEach((deleteButton) => {
 });
 /////////////////////////////////////////////////////////
 
-//update a comment  --> do the page render first
-document.querySelector('.updateComment').addEventListener('submit', async function(event) {
-  event.preventDefault();
-  const title = document.getElementById('blog-title').value;
-  const content = document.getElementById('blog-content').value;
-  const postId = document.getElementById('post-id').value; 
-
-  const response = await fetch(`/api/blog/updatePost/${postId}`, {
-      method: 'PUT',
-      body: JSON.stringify({ title, content }),
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  });
-
-  if (response.ok) {
-      // Handle success response
-      console.log('Post updated successfully!');
-  } else {
-      // Handle error response
-      console.error('Failed to update post');
-  }
-});
-/////////////////////////////////////////////////////////
-
-
-
 
 
