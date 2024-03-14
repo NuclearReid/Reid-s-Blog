@@ -1,21 +1,26 @@
+<div class="row">
+{{!-- {{log sameUser}} --}}
+{{!-- {{log 'before #each ' sameUser}} --}}
+{{log 'inside #each ../sameUser' sameUser}}
 {{#each allPosts as |blogPost| }}
-{{!-- {{log 'Blog post id is: '{{../id}} }} --}}
-<section class="card">
-    <div class="card mb-3" style="width: 18rem;">
-    <div class="card-body postInfo">
-        <h5 class="card-title">{{title}}
-        </h5>
-        <p class="card-text">{{content}}</p>                
-        <p class="card-text">Created by: {{ blogPost.user.userName }} <br>On: {{format_date date_created}} </p>
-        <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
-        {{#if ../logged_in}}
-            <a href="/blogUpdate/{{blogPost.id}}" type="button" class="btn btn-secondary">Update!</a>
-            <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
-        {{/if}}
+{{!-- {{log ../sameUser}} --}}
+    <div class="d-flex col-md-5 justify-content-center">
+        {{!-- <section class="card"> --}}
+            <div class="blog-card rounded-top-5 pb-3 card mb-3 px-2 shadow" style="width: 40rem;">
+                <div class="postInfo">
+                    <h3 class="fs-1 fw-bold header card-title">{{title}}</h5>
+                    <p class="fs-2 ard-text">{{content}}</p>                
+                    <p class="card-text">Created by: {{ blogPost.user.userName }} <br>On: {{format_date date_created}} </p>
+                    <a href="/blogpost/{{blogPost.id}}" class="btn btn-primary">Comments</a>
+                    {{#if blogPost.ownedByCurrentUser}}
+                        <a href="/blogUpdate/{{blogPost.id}}" type="button" class="btn btn-secondary">Update!</a>
+                        <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
+                    {{/if}}
+                </div>
+            </div>
+        {{!-- </section> --}}
     </div>
-    </div>
-</section>
 {{/each}}
-
+</div>
 
 <script src="../js/changePost.js"></script>
