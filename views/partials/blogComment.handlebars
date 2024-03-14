@@ -1,4 +1,4 @@
-{{#each comments as |comment|}}
+{{#each selectComments as |comment|}}
 {{!-- this is where i'll render the comments when they're in the database --}}
 <section class="card commentInfo">
     <div class="card mb-3" style="width: 18rem;">
@@ -6,7 +6,7 @@
             <p class="card-text">{{comment.commentPost}}</p>
             {{!-- I can't get userName to work yet and I don't know why --}}
              <p class="card-text">Created by: {{comment.user.userName}} <br> On: {{format_date date_created}}</p>
-             {{#if ../logged_in}}
+             {{#if comment.ownedByCurrentUser}}
              <a href="/commentUpdate/{{comment.id}}" type="button" class="btn btn-secondary" >Update!</a>
              <button type="button" class="btn btn-danger" data-id="{{id}}">Delete!</button>
              {{/if}}

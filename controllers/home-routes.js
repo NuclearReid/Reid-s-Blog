@@ -34,7 +34,6 @@ router.get("/", async (req, res) => {
     // console.log(sameUser);
     res.render("home", {
       // the data that's sent/will be usable in 'home.handlebars'
-      // sameUser,
       allPosts,
       logged_in: req.session.logged_in,
     });
@@ -67,26 +66,37 @@ router.get("/blogpost/:id", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ["userName"],
+          attributes: {exclude: ["password"]},
         },
       ],
     });
 
     // serialise all the comments (this needs .map cause there can be more than 1 comments)
-    const selectComments = dbCommentData.map((comment) =>
-      comment.get({ plain: true })
-    );
+    // const allPosts = dbBlogPostData.map((allPost) => {
+    //     post = allPost.get({ plain: true });
+    //     post.ownedByCurrentUser = post.userId === req.session.user_id;
+    //     return post;
+    //   });
 
+    const selectComments = dbCommentData.map((comment) =>{
+      comment = comment.get({ plain: true });
+      comment.ownedByCurrentUser = comment.user_id === req.session.user_id;
+      return comment;
+    });
+    
     // serialize the blog post. only 1 blog post so it doesn't need a .map()
     const selectBlog = dbBlogPostData.get({ plain: true });
-    console.log(selectBlog);
+    // console.log(selectBlog);
     // console.log(selectComments);
     // console.log(dbBlogPostData);
     // Render the view with the blog post and associated comments
+    console.log('select comments: ',selectComments);
+    console.log('req.session.user_id: ',req.session.user_id);
     res.render("comment", {
       ...selectBlog,
       // sends the comment data to comment.handlebars
-      comments: selectComments,
+    //   comments: selectComments,
+      selectComments,
       logged_in: req.session.logged_in,
     });
   } catch (error) {
