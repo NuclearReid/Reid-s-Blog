@@ -103,7 +103,7 @@ router.put('/updateComment/:id', async (req, res) => {
             return res.status(404).json({message: 'comment not found'});
         }
         const {content} = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         comment.commentPost = content;
         await comment.save();
         res.status(200).json({message: 'updated the comment!'});

@@ -1,5 +1,5 @@
 {{!-- a very basic login form --}}
-<form class="signup-form">
+{{!-- <form class="signup-form">
     <div class="mb-3">
     <label for="username-signup" class="form-label">Enter your Username</label>
     <input type="text" class="form-control" id="username-signup" aria-describedby="usernameHelp">
@@ -18,7 +18,29 @@
     <input type="password" class="form-control" id="password-signup-confirm">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form> --}}
+<div class="create-card">
+  <form class="signup-form">
+      <div class="mb-3 postText">
+      <label for="username-signup" class="form-label">Enter your Username</label>
+      <input type="text" class="form-control" id="username-signup" aria-describedby="usernameHelp">
+    </div>
+    <div class="mb-3 postText">
+      <label for="email-signup" class="form-label">Enter your Email address</label>
+      <input type="text" class="form-control" id="email-signup" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3 postText">
+      <label for="password-signup" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password-signup">
+    </div>
+    <div class="mb-3 postText">
+      <label for="password-signup-confirm" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="password-signup-confirm">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 
 {{!-- the .js script to make the form work --}}
     <script src="./js/signUp.js"></script>

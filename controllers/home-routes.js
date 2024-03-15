@@ -16,14 +16,16 @@ router.get("/", async (req, res) => {
       ],
       order: [["id", "DESC"]],
     });
-    // serialize the posts
-    const allPosts = dbBlogPostData.map((allPost) => {
+   // this will serialize the data and enriches the object with a boolean to see if the logged in user made the comment
+    //   this new part of the object is used for the handlebars if statment
+
+      const allPosts = dbBlogPostData.map((allPost) => {
       post = allPost.get({ plain: true });
       post.ownedByCurrentUser = post.userId === req.session.user_id;
       return post;
     });
-    console.log(allPosts);
-    console.log("req.session.user_id is: ", req.session.user_id);
+    // console.log(allPosts);
+    // console.log("req.session.user_id is: ", req.session.user_id);
 
     // const sameUser = allPosts.map((post) => {
     //     post.ownedByCurrentUser = (post.userId === req.session.user_id)
@@ -71,13 +73,8 @@ router.get("/blogpost/:id", async (req, res) => {
       ],
     });
 
-    // serialise all the comments (this needs .map cause there can be more than 1 comments)
-    // const allPosts = dbBlogPostData.map((allPost) => {
-    //     post = allPost.get({ plain: true });
-    //     post.ownedByCurrentUser = post.userId === req.session.user_id;
-    //     return post;
-    //   });
-
+    // this will serialize the data and enriches the object with a boolean to see if the logged in user made the comment
+    //   this new part of the object is used for the handlebars if statment
     const selectComments = dbCommentData.map((comment) =>{
       comment = comment.get({ plain: true });
       comment.ownedByCurrentUser = comment.user_id === req.session.user_id;
@@ -86,12 +83,10 @@ router.get("/blogpost/:id", async (req, res) => {
     
     // serialize the blog post. only 1 blog post so it doesn't need a .map()
     const selectBlog = dbBlogPostData.get({ plain: true });
-    // console.log(selectBlog);
-    // console.log(selectComments);
-    // console.log(dbBlogPostData);
+
     // Render the view with the blog post and associated comments
-    console.log('select comments: ',selectComments);
-    console.log('req.session.user_id: ',req.session.user_id);
+    // console.log('select comments: ',selectComments);
+    // console.log('req.session.user_id: ',req.session.user_id);
     res.render("comment", {
       ...selectBlog,
       // sends the comment data to comment.handlebars
@@ -110,7 +105,7 @@ router.get("/blogUpdate/:id", async (req, res) => {
   try {
     const dbBlogPostData = await blogPost.findByPk(req.params.id);
     const selectPost = dbBlogPostData.get({ plain: true });
-    // console.log(selectPost);
+
     res.render("updateBlog", {
       selectPost,
       logged_in: req.session.logged_in,
@@ -124,7 +119,6 @@ router.get("/commentUpdate/:id", async (req, res) => {
   try {
     const dbCommentData = await Comment.findByPk(req.params.id);
     const selectComment = dbCommentData.get({ plain: true });
-    // console.log(selectPost);
     res.render("updateComment", {
       selectComment,
       logged_in: req.session.logged_in,
@@ -146,7 +140,7 @@ router.get("/profile", withAuth, async (req, res) => {
     // took me a bit to get how this is working but open the Session table in mysql
     // and log in with different accounts. It'll make more sense seeing
     // what the table looks like
-    console.log(`the session.user_id: ${req.session.user_id}`);
+    // console.log(`the session.user_id: ${req.session.user_id}`);
 
     const userData = await User.findByPk(req.session.user_id, {
       // doesn't get the password key

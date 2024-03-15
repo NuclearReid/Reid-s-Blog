@@ -1,17 +1,18 @@
 
 {{!-- the blog post they clicked on --}}
-<section class="card">
-    <div class="card mb-3" style="width: 18rem;">
-        <div class="card-body">
+
+<section class="card chillBkg-card">
+    <div class="card mb-3 comment-card" style="width: 18rem;">
+        <div class="card-body chillBkg-card">
             <h5 class="card-title">{{title}}
             </h5>
             <p class="card-text">{{content}}</p>
-            <p class="card-text">Created by: {{ user.userName }} <br> On: {{format_date date_created}}</p>
+            <p id="blogLine" class="card-text">Created by: {{ user.userName }} <br> On: {{format_date date_created}}</p>
         </div>
     </div>
 </section>
 {{!-- the partial to display the comments --}}
-<section>
+<section class="commentHeader">
     <header>
         Comments!
     </header>
@@ -21,7 +22,7 @@
 {{#if logged_in}}
     <section>
         <form class="newComment" id="postId" data-blogid="{{id}}">
-            <div class="mb-3">
+            <div class="mb-3 newComment-label">
                 <label for="text" class="form-label">Leave a comment!</label>
                 <textarea class="form-control" id="comment-text" rows="3"></textarea>
             </div>

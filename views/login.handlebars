@@ -1,5 +1,6 @@
+
 {{!-- a basic login form --}}
-<form class="login-form">
+{{!-- <form class="login-form">
   <div class="mb-3">
     <label for="email-login" class="form-label">Email address</label>
     <input type="email" class="form-control" id="email-login" aria-describedby="emailHelp">
@@ -11,6 +12,21 @@
     <a href="/createAccount">Create an account</a>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form> --}}
+<div class="card login-card">
+    <form class="login-form">
+        <div class="mb-3 postText">
+            <label for="email-login" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email-login" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3 postText">
+            <label for="password-login" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password-login">
+            <a href="/createAccount">Create an account</a>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 <script src="./js/login.js"></script>
