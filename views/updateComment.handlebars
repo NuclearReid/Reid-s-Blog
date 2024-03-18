@@ -15,9 +15,8 @@
         <div class="col-md-6">
             <div class="card login-card">
                 <div class="card-body">
-                    <h1>The Original Post!</h1>
-                    <h3>Your riginal Comment you'd like to change: {{selectComment.commentPost}}</h3>
-                    {{log selectComment}}
+                    <h3>Your Original Comment you'd like to change: {{selectComment.commentPost}}</h3>
+                    {{!-- {{log selectComment}} --}}
                     <form class="updateComment">
                         <input type="hidden" id="comment-id" value="{{selectComment.id}}">
                         <div class="mb-3 updateComment-textarea" id="blogPost-id" data-blogpostid="{{selectComment.blogPost_id}}">

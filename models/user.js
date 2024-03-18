@@ -28,12 +28,9 @@ User.init(
         password:{
             type: DataTypes.STRING,
             allowNull: false,
-            // validate:{
-            //     is: {
-            //         args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-            //         msg: 'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.',
-            //       },
-            // },
+            validate:{
+              len: [8],
+            },
         },
         email:{
             type: DataTypes.STRING,
