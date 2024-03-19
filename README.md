@@ -5,7 +5,11 @@
   ## Description
   
   A simple blog made with handlebars, node.js, sequelize, mySQL, and a couple other libraries thrown in there. Make an account,  make posts, comments, and read other users posts/comments. The site is hosted on heroku.
-  
+
+  [To my blog!](https://reids-blog-6b81b14466fd.herokuapp.com/)
+
+  ![An image of the deployed application](./readme-assets/Screenshot%202024-03-19%20at%202.51.06 pm.png)
+
   ## Table of Contents
   
   - [Installation](#installation)
