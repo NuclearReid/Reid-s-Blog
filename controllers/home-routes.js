@@ -44,7 +44,47 @@ router.get("/", async (req, res) => {
     res.status(500).json(error);
   }
 });
+router.get("/dashboard", async (req, res) => {
+  try {
+    // finds all the blogPosts
+    const dbBlogPostData = await blogPost.findAll({
+      include: [
+        {
+          // includes the username, will let me display the username on the blog post
+          model: User,
+          attributes: { exclude: ["password"] },
+        },
+      ],
+      order: [["id", "DESC"]],
+    });
+   // this will serialize the data and enriches the object with a boolean to see if the logged in user made the comment
+    //   this new part of the object is used for the handlebars if statment
 
+      const allPosts = dbBlogPostData.map((allPost) => {
+      post = allPost.get({ plain: true });
+      post.ownedByCurrentUser = post.userId === req.session.user_id;
+      return post;
+    });
+    // console.log(allPosts);
+    // console.log("req.session.user_id is: ", req.session.user_id);
+
+    // const sameUser = allPosts.map((post) => {
+    //     post.ownedByCurrentUser = (post.userId === req.session.user_id)
+    //     return post;
+    // });
+
+    // console.log(allPosts.user_id)
+    // console.log(sameUser);
+    res.render("dashboard", {
+      // the data that's sent/will be usable in 'home.handlebars'
+      allPosts,
+      logged_in: req.session.logged_in,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+});
 // This will be used when someone clicks on a specific blog post
 // take a look at /partials/blogpost-details.handlebars for a little more how it works
 // essentially, when you click on the 'comment' button, the href is '/blogpost/{{blogPost.id}}'

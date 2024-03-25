@@ -17,7 +17,7 @@ const newPostFormHandler = async (event) => {
       });
       if (response.ok) {
         // If successful, redirect the browser to the home page
-        document.location.replace('/');
+        document.location.replace('/dashboard');
     }
   };
   
