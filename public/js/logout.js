@@ -8,6 +8,7 @@ const logout = async () => {
     });
     // console.log('in the logout fetch');
     if (response.ok) {
+      console.log('logged out');
       document.location.replace('/');
     } else {
       alert(response.statusText);

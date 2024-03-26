@@ -66,6 +66,7 @@ router.get("/dashboard", async (req, res) => {
       return post;
     });
     // console.log(allPosts);
+
     // console.log("req.session.user_id is: ", req.session.user_id);
 
     // const sameUser = allPosts.map((post) => {
@@ -75,11 +76,21 @@ router.get("/dashboard", async (req, res) => {
 
     // console.log(allPosts.user_id)
     // console.log(sameUser);
-    res.render("dashboard", {
-      // the data that's sent/will be usable in 'home.handlebars'
-      allPosts,
-      logged_in: req.session.logged_in,
-    });
+    console.log('///////////////////////////////////////////');
+    console.log('////////////////////////////////////////////////////////////////req.session.logged_in is: ', req.session.logged_in);
+    if(req.session.logged_in){
+        res.render("dashboard", {
+        // the data that's sent/will be usable in 'home.handlebars'
+        allPosts,
+        logged_in: req.session.logged_in,
+      });
+    }
+    else{
+      res.render('home',{
+        allPosts,
+        logged_in: req.session.logged_in,
+      })
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json(error);
