@@ -22,15 +22,15 @@
   background-color: #dcd8d392;
   backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
 }
-.dashBoard a,
+/* .dashBoard a, */
 .navbar a {
   color: black;
 }
-.dashBoard a {
+/* .dashBoard a {
   font-size: 3rem;
 }
 
-.dashBoard a:hover,
+.dashBoard a:hover, */
 .navbar a:hover {
   text-decoration: underline;
   color: black;
