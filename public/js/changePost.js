@@ -33,7 +33,7 @@ document.querySelector('.updatePost').addEventListener('submit', async function(
   if (response.ok) {
       // Handle success response
       console.log('Post updated successfully!');
-      document.location.replace('/');
+      document.location.replace('/dashboard');
   } else {
       // Handle error response
       console.error('Failed to update post');
