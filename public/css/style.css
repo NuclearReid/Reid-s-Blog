@@ -13,6 +13,7 @@
   border: none;
   padding-left: 1rem;
 }
+
 #blogLine {
   border-bottom: 2px solid rgba(0, 0, 0, 0.125);
 }
@@ -21,10 +22,15 @@
   background-color: #dcd8d392;
   backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
 }
-
+.dashBoard a,
 .navbar a {
   color: black;
 }
+.dashBoard a {
+  font-size: 3rem;
+}
+
+.dashBoard a:hover,
 .navbar a:hover {
   text-decoration: underline;
   color: black;
